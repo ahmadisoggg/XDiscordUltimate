@@ -501,7 +501,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- **Discord**: [Join our Discord]((https://discord.gg/yAgRafG6JD))
+- **Discord**: [Join our Discord](https://discord.gg/yAgRafG6JD)
 - **Issues**: [GitHub Issues](https://github.com/xreatlabs/XDiscordUltimate/issues)
 - **Wiki**: [GitHub Wiki](https://github.com/xreatlabs/XDiscordUltimate/wiki)
 - **Documentation**: [Full Documentation](https://docs.xreatlabs.com/xdiscordultimate)
