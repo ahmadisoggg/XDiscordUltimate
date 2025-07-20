@@ -3,14 +3,14 @@
 The most comprehensive Discord integration plugin for Minecraft servers, featuring 17+ modules for complete Discord-Minecraft synchronization.
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![Minecraft](https://img.shields.io/badge/minecraft-1.8--1.21.8-green)
+![Minecraft](https://img.shields.io/badge/minecraft-1.16.5--1.21.8-green)
 ![Discord](https://img.shields.io/badge/discord-JDA_5.0-7289da)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
 ## 🌟 Features
 
 ### Core Features
-- **OAuth2 Verification System** - Secure Discord account linking with web-based verification
+- **Verification System** - Secure Discord account linking with discord-code verification
 - **Modular Architecture** - Enable/disable features as needed
 - **Multi-Database Support** - SQLite, MySQL, and PostgreSQL
 - **PlaceholderAPI Integration** - Full placeholder support
@@ -20,7 +20,7 @@ The most comprehensive Discord integration plugin for Minecraft servers, featuri
 ### 📦 Modules
 
 #### 1. **Verification Module**
-- OAuth2-based account linking
+- discord-code account linking
 - Automatic role assignment
 - Whitelist mode with kick timer
 - Custom verification messages
@@ -112,8 +112,8 @@ The most comprehensive Discord integration plugin for Minecraft servers, featuri
 
 ## 📋 Requirements
 
-- **Minecraft Server**: 1.8 - 1.21.8
-- **Java**: 8 or higher
+- **Minecraft Server**: 1.16.5 - 1.21.8
+- **Java**: 17 or higher
 - **Discord Bot**: With appropriate permissions
 - **Optional Dependencies**:
   - PlaceholderAPI
@@ -122,7 +122,7 @@ The most comprehensive Discord integration plugin for Minecraft servers, featuri
 
 ## 🚀 Installation
 
-1. **Download** the latest release from [Releases](https://github.com/yourusername/XDiscordUltimate/releases)
+1. **Download** the latest release from [Releases](https://github.com/xreatlabs/XDiscordUltimate/releases)
 2. **Place** the JAR file in your server's `plugins` folder
 3. **Start** your server to generate configuration files
 4. **Stop** your server
@@ -327,7 +327,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Credits
 
 - **Developer**: XReatLabs Team
-- **Contributors**: See [contributors](https://github.com/yourusername/XDiscordUltimate/contributors)
+- **Contributors**: See [contributors](https://github.com/xreatlabs/XDiscordUltimate/contributors)
 - **Libraries Used**:
   - [JDA](https://github.com/DV8FromTheWorld/JDA) - Discord API
   - [HikariCP](https://github.com/brettwooldridge/HikariCP) - Database pooling
@@ -337,8 +337,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 - **Discord**: [Join our Discord](https://discord.gg/yourinvite)
-- **Issues**: [GitHub Issues](https://github.com/yourusername/XDiscordUltimate/issues)
-- **Wiki**: [GitHub Wiki](https://github.com/yourusername/XDiscordUltimate/wiki)
+- **Issues**: [GitHub Issues](https://github.com/xreatlabs/XDiscordUltimate/issues)
+- **Wiki**: [GitHub Wiki](https://github.com/xreatlabs/XDiscordUltimate/wiki)
 - **Email**: support@xreatlabs.com
 
 ## 🔄 Update History
@@ -352,4 +352,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Made with ❤️ by XReatLabs Team
+Made with ❤️ by Xreatlabs Team
