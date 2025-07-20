@@ -19,6 +19,7 @@ repositories {
     maven { url 'https://jitpack.io' }
     maven { url 'https://repo.extendedclip.com/content/repositories/placeholderapi/' }
     maven { url 'https://nexus.scarsz.me/content/groups/public/' }
+    maven { url 'https://repo.alessiodp.com/releases/' }
 }
 
 dependencies {
@@ -26,26 +27,21 @@ dependencies {
     compileOnly 'net.luckperms:api:5.4'
     compileOnly 'me.clip:placeholderapi:2.11.3'
     
-    // Discord API
-    implementation 'net.dv8tion:JDA:5.0.0-beta.18'
+    // Libby for runtime dependency management
+    implementation 'net.byteflux:libby-bukkit:1.3.1'
     
-    // For OAuth2 and HTTP requests
-    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
-    implementation 'com.google.code.gson:gson:2.10.1'
-    
-    // Database connection pooling
-    implementation 'com.zaxxer:HikariCP:5.0.1'
-    
-    // Database drivers
-    implementation 'org.xerial:sqlite-jdbc:3.42.0.0'
-    implementation 'com.mysql:mysql-connector-j:8.0.33'
-    implementation 'org.postgresql:postgresql:42.6.0'
-    
-    // Logging
-    implementation 'org.slf4j:slf4j-api:2.0.9'
-    implementation 'ch.qos.logback:logback-classic:1.4.11'
-    implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
-    implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
+    // All other dependencies as compileOnly for runtime loading
+    compileOnly 'net.dv8tion:JDA:5.0.0-beta.18'
+    compileOnly 'com.squareup.okhttp3:okhttp:4.10.0'
+    compileOnly 'com.google.code.gson:gson:2.10.1'
+    compileOnly 'com.zaxxer:HikariCP:5.0.1'
+    compileOnly 'org.xerial:sqlite-jdbc:3.42.0.0'
+    compileOnly 'com.mysql:mysql-connector-j:8.0.33'
+    compileOnly 'org.postgresql:postgresql:42.6.0'
+    compileOnly 'org.slf4j:slf4j-api:2.0.9'
+    compileOnly 'ch.qos.logback:logback-classic:1.4.11'
+    compileOnly 'org.apache.logging.log4j:log4j-core:2.17.1'
+    compileOnly 'org.apache.logging.log4j:log4j-api:2.17.1'
 }
 
 tasks.withType(JavaCompile) {
@@ -57,17 +53,8 @@ shadowJar {
     archiveClassifier.set('')
     archiveVersion.set(version)
     
-    relocate 'net.dv8tion.jda', 'com.xreatlabs.xdiscordultimate.libs.jda'
-    relocate 'okhttp3', 'com.xreatlabs.xdiscordultimate.libs.okhttp3'
-    relocate 'com.google.gson', 'com.xreatlabs.xdiscordultimate.libs.gson'
-    relocate 'com.zaxxer.hikari', 'com.xreatlabs.xdiscordultimate.libs.hikari'
-    // Don't relocate SQLite to preserve native library loading
-    // relocate 'org.sqlite', 'com.xreatlabs.xdiscordultimate.libs.sqlite'
-    relocate 'com.mysql', 'com.xreatlabs.xdiscordultimate.libs.mysql'
-    relocate 'org.postgresql', 'com.xreatlabs.xdiscordultimate.libs.postgresql'
-    relocate 'org.slf4j', 'com.xreatlabs.xdiscordultimate.libs.slf4j'
-    relocate 'ch.qos.logback', 'com.xreatlabs.xdiscordultimate.libs.logback'
-    relocate 'org.apache.logging.log4j', 'com.xreatlabs.xdiscordultimate.libs.log4j'
+    // Only relocate Libby to avoid conflicts
+    relocate 'net.byteflux.libby', 'com.xreatlabs.xdiscordultimate.libs.libby'
 }
 
 jar {

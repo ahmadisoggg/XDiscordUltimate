@@ -31,6 +31,18 @@ public class XDiscordUltimate extends JavaPlugin {
     public void onEnable() {
         instance = this;
         
+        getLogger().info("XDiscordUltimate starting up...");
+        
+        // Load runtime dependencies first
+        try {
+            LibraryManager libraryManager = new LibraryManager(this);
+            libraryManager.loadAllLibraries();
+        } catch (Exception e) {
+            getLogger().severe("Failed to load dependencies! Plugin will be disabled.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+        
         // Initialize configuration
         saveDefaultConfig();
         configManager = new ConfigManager(this);
