@@ -11,6 +11,7 @@ The most comprehensive Discord integration plugin for Minecraft servers, featuri
 
 ### Core Features
 - **Modern Discord Bot** - Full slash command support with interactive buttons
+- **Server Logging** - Log server events, advancements, and all player commands to a single Discord channel.
 - **Verification System** - Secure Discord account linking with verification codes
 - **GUI Help System** - Interactive in-game help with categorized commands
 - **Text-to-Speech Integration** - Voice announcements for Discord voice channels
@@ -21,6 +22,13 @@ The most comprehensive Discord integration plugin for Minecraft servers, featuri
 - **LuckPerms Integration** - Permission and group synchronization
 
 ### 🎮 New Modern Features
+
+#### **Unified Server Logging**
+- **All-in-One Logging** - A single channel for all server logs.
+- **Advancement Logging** - Announce when a player earns an advancement.
+- **Command Logging** - Log every command a player uses.
+- **Ignored Commands** - A configurable list of commands to ignore, reducing spam.
+- **Customizable Messages** - Change the format of log messages to your liking.
 
 #### **Interactive GUI Help System**
 - **In-Game Help GUI** - Use `/help` to open an interactive help interface
@@ -245,6 +253,29 @@ The most comprehensive Discord integration plugin for Minecraft servers, featuri
    ```
 
 ### Advanced Configuration
+
+#### Server Logging
+```yaml
+features:
+  server-logging:
+    enabled: true
+    # Discord channel ID for logs (use channel ID, not name)
+    logs-channel-id: "YOUR_LOGS_CHANNEL_ID"
+    # Log server start/stop events
+    log-server-events: true
+    # Log player advancements
+    log-advancements: true
+    # Log commands used by players
+    log-commands: true
+    # List of commands to IGNORE. Commands listed here will NOT be logged.
+    ignored-commands:
+      - "afk"
+      - "balancetop"
+      - "seen"
+    # Message formats
+    advancement-message: "🏆 **%player%** has made the advancement **[%advancement%]**"
+    command-message: "```[%timestamp%] %player% used command: %command%```"
+```
 
 #### Text-to-Speech Settings
 ```yaml
