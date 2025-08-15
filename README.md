@@ -58,8 +58,11 @@ Download the latest release from the releases page or build from source.
 ### Build Steps
 ```bash
 # Clone the repository
-git clone https://github.com/xreatlabs/xdiscordultimate.git
-cd xdiscordultimate
+git clone https://github.com/Xreatlabs/XDiscordUltimate.git
+cd XDiscordUltimate
+
+# Switch to the feature branch
+git checkout feature/enhanced-chat-bridge-playtime
 
 # Build with Gradle
 ./gradlew build
@@ -217,7 +220,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - **Discord**: Join our support server
 - **Issues**: Report bugs on GitHub
-- **Wiki**: Check the [wiki](https://github.com/xreatlabs/xdiscordultimate/wiki) for detailed documentation
+- **Wiki**: Check the [wiki](https://github.com/Xreatlabs/XDiscordUltimate/wiki) for detailed documentation
 
 ## 🙏 Acknowledgments
 
