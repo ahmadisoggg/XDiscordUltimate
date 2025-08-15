@@ -28,18 +28,83 @@ Advanced Discord integration for Minecraft servers with enhanced chat bridge, co
 - **Custom Styling**: Personalized message colors and formatting
 - **Player Context**: Enhanced messages with player information
 
-### Server Management
+### Server Management & Control
 - **Status Monitoring**: Real-time server status with TPS and memory usage
 - **Console Integration**: Discord console access and logging
 - **Player Management**: Kick, ban, and player information commands
 - **Server Control**: Start, stop, and restart server commands
 - **Performance Metrics**: Detailed server performance tracking
+- **Admin Alerts**: Real-time notifications for server events
+- **Bot Console**: Discord-based server console access
 
-### Security & Permissions
-- **Role-Based Access**: Discord role integration with permissions
-- **Secure Verification**: Encrypted account linking system
-- **Permission Management**: Granular permission control
-- **Audit Logging**: Comprehensive activity logging
+### Voice Channel Integration
+- **Proximity Chat**: Voice channels based on player proximity
+- **World-Based Channels**: Automatic voice channels per world
+- **Region Channels**: Location-based voice channel creation
+- **Text-to-Speech**: TTS support for voice channel messages
+- **Dynamic Channels**: Temporary voice channels for groups
+- **Voice Activity**: Discord voice activity synchronization
+
+### Mini-Games & Entertainment
+- **Interactive Polls**: Discord-based voting and polls
+- **Mini-Games**: Various Discord-integrated games
+- **Reaction Games**: Emoji-based interactive games
+- **Player Challenges**: Custom game challenges and events
+- **Reward System**: Game rewards and point tracking
+- **Leaderboards**: Dynamic player statistics and rankings
+
+### Leaderboards & Statistics
+- **Dynamic Leaderboards**: Real-time player statistics
+- **PlaceholderAPI Integration**: Custom statistic tracking
+- **Discord Sync**: Automatic leaderboard updates to Discord
+- **GUI Interface**: In-game leaderboard interface
+- **Multiple Categories**: Various leaderboard types
+- **Custom Statistics**: Configurable stat tracking
+
+### Moderation & Security
+- **Moderation Logging**: Comprehensive moderation tracking
+- **Cross-Platform Sync**: Ban/kick synchronization between platforms
+- **Audit Logging**: Detailed activity and command logging
+- **Role Management**: Discord role synchronization
+- **Auto-Roles**: Automatic role assignment
+- **Permission Control**: Granular permission management
+
+### Announcements & Communication
+- **Scheduled Announcements**: Automated announcement system
+- **Cross-Server Announcements**: Multi-server communication
+- **Custom Alerts**: Configurable alert system
+- **Event Notifications**: Special event announcements
+- **Webhook Integration**: External webhook support
+- **Message Formatting**: Rich message formatting options
+
+### Information & Help
+- **Server Information**: Real-time server statistics
+- **Player Information**: Detailed player data display
+- **Help System**: Comprehensive help and documentation
+- **Command Integration**: Discord command system
+- **FAQ System**: Automated FAQ responses
+- **Support Integration**: Integrated support system
+
+### Reactions & Interactions
+- **Emoji Reactions**: Discord emoji reaction system
+- **Interactive Menus**: Discord-based interactive menus
+- **Button Integration**: Discord button interactions
+- **Dropdown Menus**: Selection-based interactions
+- **Custom Reactions**: Configurable reaction systems
+
+### Logging & Monitoring
+- **Comprehensive Logging**: Detailed activity logging
+- **Discord Logging**: Discord channel logging
+- **Error Tracking**: Error and exception logging
+- **Performance Monitoring**: Server performance tracking
+- **Audit Trails**: Complete audit trail system
+
+### Cross-Server Features
+- **Multi-Server Sync**: Synchronization across multiple servers
+- **Network Communication**: Inter-server messaging
+- **Shared Data**: Cross-server data sharing
+- **Unified Management**: Centralized server management
+- **Load Balancing**: Server load distribution
 
 ## 📋 Requirements
 
@@ -145,6 +210,57 @@ features:
     ticket-channel: "support-tickets"
     max-tickets: 5
     auto-close: true
+
+# Voice Channels
+  voice:
+    enabled: true
+    proximity-chat: true
+    world-channels: true
+    region-channels: true
+    tts-enabled: true
+    proximity-range: 50
+    voice-category: "Voice Channels"
+
+# Mini-Games
+  minigames:
+    enabled: true
+    games-channel: "mini-games"
+    max-poll-duration: 60
+    allow-multiple-votes: false
+    game-cooldown: 5
+
+# Leaderboards
+  leaderboards:
+    enabled: true
+    discord-channel: "leaderboards"
+    update-interval: 300
+    max-entries: 10
+    enable-discord-sync: true
+    enable-gui: true
+
+# Moderation
+  moderation:
+    enabled: true
+    log-channel: "moderation-logs"
+    sync-bans: true
+    sync-kicks: true
+    sync-mutes: true
+    log-commands: true
+    muted-role: "Muted"
+
+# Announcements
+  announcements:
+    enabled: true
+    announcement-channel: "announcements"
+    scheduled-announcements: true
+    cross-server: true
+
+# Auto-Roles
+  autoroles:
+    enabled: true
+    verification-role: "Verified"
+    join-role: "Member"
+    vip-role: "VIP"
 ```
 
 ## 📜 Commands
@@ -262,16 +378,23 @@ Check server logs for detailed error information:
 ## 📝 Changelog
 
 ### Version 1.0.0
-- Complete Discord integration system
-- Enhanced chat bridge with rich embeds
-- Comprehensive player event tracking
-- Advanced playtime tracking system
-- Support ticket system
-- Server control and monitoring
-- Cross-server communication
-- Account verification system
-- Performance optimization
-- Extensive configuration options
+- Complete Discord integration system with 20+ modules
+- Enhanced chat bridge with rich embeds and message filtering
+- Comprehensive player event tracking with playtime statistics
+- Advanced voice channel integration with proximity chat
+- Interactive mini-games and polls system
+- Dynamic leaderboards with PlaceholderAPI integration
+- Comprehensive moderation and security system
+- Automated announcements and cross-server communication
+- Support ticket system with Discord integration
+- Server control and monitoring with console access
+- Account verification and auto-role system
+- Cross-server synchronization and network communication
+- Performance optimization and extensive logging
+- Rich configuration options for all modules
+- Interactive Discord components (buttons, menus, reactions)
+- Text-to-speech support for voice channels
+- Webhook integration and external API support
 
 ## 🤝 Contributing
 
