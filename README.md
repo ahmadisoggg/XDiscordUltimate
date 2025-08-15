@@ -61,9 +61,6 @@ Download the latest release from the releases page or build from source.
 git clone https://github.com/Xreatlabs/XDiscordUltimate.git
 cd XDiscordUltimate
 
-# Switch to the feature branch
-git checkout feature/enhanced-chat-bridge-playtime
-
 # Build with Gradle
 ./gradlew build
 
