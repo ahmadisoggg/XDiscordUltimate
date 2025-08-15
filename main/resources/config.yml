@@ -401,11 +401,24 @@ network:
     - id: "survival"
       address: "127.0.0.1:25102"
 
-# Discord Console
+# Enhanced Discord Console
 discord-console:
   enabled: true
   channel-id: "YOUR_CONSOLE_CHANNEL_ID"
   allowed-roles:
     - "Admin"
     - "Owner"
+  # Message filtering
+  show-player-chat: true
+  show-commands: true
+  show-errors: true
+  show-warnings: true
+  show-info: false
+  # Message formatting
+  message-format: "&7[&9Discord&7] &b{user}&7: &f{message}"
+  command-prefix: "/"
+  # Rate limiting
+  rate-limit:
+    messages-per-minute: 30
+    commands-per-minute: 10
 
