@@ -9,8 +9,9 @@ softdepend: [LuckPerms, PlaceholderAPI, Vault]
 
 commands:
   verify:
-    description: Link your Discord account with Minecraft
-    usage: /<command>
+    description: Verify your Discord account with a code
+    usage: /<command> <code>
+    permission: xdiscord.verify
     aliases: [link, discord]
   
   support:

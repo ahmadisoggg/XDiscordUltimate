@@ -225,24 +225,41 @@ public class DiscordListener extends ListenerAdapter {
         String username = event.getOption("username") != null ? 
             event.getOption("username").getAsString() : null;
         
+        // Check if user is already verified
+        String discordId = event.getUser().getId();
+        if (plugin.getAdminUtils().isVerifiedByDiscordId(discordId)) {
+            EmbedBuilder alreadyVerifiedEmbed = new EmbedBuilder()
+                .setTitle("✅ Already Verified")
+                .setDescription("Your Discord account is already linked to a Minecraft account!")
+                .setColor(Color.GREEN)
+                .setTimestamp(Instant.now())
+                .setFooter("XDiscordUltimate", event.getJDA().getSelfUser().getAvatarUrl());
+            
+            event.replyEmbeds(alreadyVerifiedEmbed.build()).setEphemeral(true).queue();
+            return;
+        }
+        
         // Generate verification code
         String code = generateVerificationCode();
-        String discordId = event.getUser().getId();
         
         // Store verification attempt
         plugin.getDatabaseManager().storeVerificationCode(discordId, code, username);
         
         EmbedBuilder embed = new EmbedBuilder()
             .setTitle("🔗 Account Verification")
-            .setDescription("Use this code to link your accounts!")
-            .addField("Verification Code", "`" + code + "`", false)
-            .addField("How to verify", "In Minecraft, type: `/verify " + code + "`", false)
+            .setDescription("Use this code to link your Discord and Minecraft accounts!")
+            .addField("🎯 Verification Code", "`" + code + "`", false)
+            .addField("📋 How to verify", "1. Join the Minecraft server\n2. Type: `/verify " + code + "`\n3. Your accounts will be linked!", false)
             .addField("⏰ Expires", "This code expires in 10 minutes", false)
-            .setColor(Color.GREEN)
+            .addField("⚠️ Important", "• Keep this code private\n• Use it only once\n• Get a new code if it expires", false)
+            .setColor(Color.BLUE)
             .setTimestamp(Instant.now())
             .setFooter("XDiscordUltimate", event.getJDA().getSelfUser().getAvatarUrl());
         
         event.replyEmbeds(embed.build()).setEphemeral(true).queue();
+        
+        // Log verification code generation
+        plugin.getLogger().info("Verification code generated for Discord user " + event.getUser().getAsTag() + ": " + code);
     }
     
     private void handleConsoleCommand(SlashCommandInteractionEvent event) {
@@ -706,7 +723,13 @@ public class DiscordListener extends ListenerAdapter {
     
     // Helper methods
     private String generateVerificationCode() {
-        return String.valueOf((int) (Math.random() * 900000) + 100000);
+        // Generate a 6-character alphanumeric code (easier to type)
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder code = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            code.append(chars.charAt((int) (Math.random() * chars.length())));
+        }
+        return code.toString();
     }
     
     private String getTPS() {
@@ -751,24 +774,41 @@ public class DiscordListener extends ListenerAdapter {
     
     // Convert SlashCommandInteractionEvent to ButtonInteractionEvent for verify button
     private void handleVerifyCommand(ButtonInteractionEvent event) {
+        // Check if user is already verified
+        String discordId = event.getUser().getId();
+        if (plugin.getAdminUtils().isVerifiedByDiscordId(discordId)) {
+            EmbedBuilder alreadyVerifiedEmbed = new EmbedBuilder()
+                .setTitle("✅ Already Verified")
+                .setDescription("Your Discord account is already linked to a Minecraft account!")
+                .setColor(Color.GREEN)
+                .setTimestamp(Instant.now())
+                .setFooter("XDiscordUltimate", event.getJDA().getSelfUser().getAvatarUrl());
+            
+            event.replyEmbeds(alreadyVerifiedEmbed.build()).setEphemeral(true).queue();
+            return;
+        }
+        
         // Generate verification code
         String code = generateVerificationCode();
-        String discordId = event.getUser().getId();
         
         // Store verification attempt
         plugin.getDatabaseManager().storeVerificationCode(discordId, code, null);
         
         EmbedBuilder embed = new EmbedBuilder()
             .setTitle("🔗 Account Verification")
-            .setDescription("Use this code to link your accounts!")
-            .addField("Verification Code", "`" + code + "`", false)
-            .addField("How to verify", "In Minecraft, type: `/verify " + code + "`", false)
+            .setDescription("Use this code to link your Discord and Minecraft accounts!")
+            .addField("🎯 Verification Code", "`" + code + "`", false)
+            .addField("📋 How to verify", "1. Join the Minecraft server\n2. Type: `/verify " + code + "`\n3. Your accounts will be linked!", false)
             .addField("⏰ Expires", "This code expires in 10 minutes", false)
-            .setColor(Color.GREEN)
+            .addField("⚠️ Important", "• Keep this code private\n• Use it only once\n• Get a new code if it expires", false)
+            .setColor(Color.BLUE)
             .setTimestamp(Instant.now())
             .setFooter("XDiscordUltimate", event.getJDA().getSelfUser().getAvatarUrl());
         
         event.replyEmbeds(embed.build()).setEphemeral(true).queue();
+        
+        // Log verification code generation
+        plugin.getLogger().info("Verification code generated for Discord user " + event.getUser().getAsTag() + ": " + code);
     }
     
     // Convert SlashCommandInteractionEvent to ButtonInteractionEvent for help button

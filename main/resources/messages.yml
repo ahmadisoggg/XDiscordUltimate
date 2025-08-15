@@ -30,6 +30,14 @@ verification:
   already-verified: "&aYour account is already verified!"
   kick-message: "&cYou must verify your Discord account within %minutes% minutes to play!"
   waiting: "&eWaiting for Discord verification..."
+  code-success: "&a✅ Account verified successfully!"
+  code-linked: "&aYour Discord and Minecraft accounts are now linked!"
+  code-already-verified: "&cYou are already verified!"
+  code-invalid: "&cInvalid or expired verification code!"
+  code-get-new: "&eGet a new code from Discord using /verify"
+  code-usage: "&cUsage: /verify <code>"
+  code-instructions: "&eGet your verification code from Discord using /verify"
+  code-features: "&aYou now have access to verified features!"
 
 # Support/Ticket messages
 support:
