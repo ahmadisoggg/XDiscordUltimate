@@ -16,9 +16,11 @@ public class DropdownManager {
                 .setPlaceholder("Select a channel")
                 .setRequiredRange(1, 1);
 
-        plugin.getDiscordManager().getJda().getTextChannels().forEach(channel -> 
-                menu.addOption(channel.getName(), channel.getId())
-        );
+        if (plugin.getDiscordManager() != null && plugin.getDiscordManager().isReady()) {
+            plugin.getDiscordManager().getJda().getTextChannels().forEach(channel -> 
+                    menu.addOption(channel.getName(), channel.getId())
+            );
+        }
 
         return menu.build();
     }
@@ -28,9 +30,11 @@ public class DropdownManager {
                 .setPlaceholder("Select a role")
                 .setRequiredRange(1, 1);
 
-        plugin.getDiscordManager().getJda().getRoles().forEach(role ->
-                menu.addOption(role.getName(), role.getId())
-        );
+        if (plugin.getDiscordManager() != null && plugin.getDiscordManager().isReady()) {
+            plugin.getDiscordManager().getJda().getRoles().forEach(role ->
+                    menu.addOption(role.getName(), role.getId())
+            );
+        }
 
         return menu.build();
     }

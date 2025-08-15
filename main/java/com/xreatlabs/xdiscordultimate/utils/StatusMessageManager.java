@@ -32,21 +32,34 @@ public class StatusMessageManager {
     }
 
     private void updateStatusMessage() {
-        TextChannel channel = plugin.getDiscordManager().getTextChannelById(channelId);
-        if (channel == null) {
-            plugin.getLogger().warning("Could not find status channel with ID: " + channelId);
-            return;
-        }
+        try {
+            TextChannel channel = plugin.getDiscordManager().getTextChannelById(channelId);
+            if (channel == null) {
+                plugin.getLogger().warning("Could not find status channel with ID: " + channelId);
+                return;
+            }
 
-        if (messageId == null || messageId.isEmpty()) {
-            channel.sendMessageEmbeds(plugin.getEmbedUtils().createServerStatusEmbed()).queue(this::setMessageId);
-        } else {
-            channel.retrieveMessageById(messageId).queue(message -> {
-                message.editMessageEmbeds(plugin.getEmbedUtils().createServerStatusEmbed()).queue();
-            }, throwable -> {
-                // Message not found, create a new one
-                channel.sendMessageEmbeds(plugin.getEmbedUtils().createServerStatusEmbed()).queue(this::setMessageId);
-            });
+            if (messageId == null || messageId.isEmpty()) {
+                channel.sendMessageEmbeds(plugin.getEmbedUtils().createServerStatusEmbed())
+                    .queue(this::setMessageId, error -> {
+                        plugin.getLogger().warning("Failed to send status message: " + error.getMessage());
+                    });
+            } else {
+                channel.retrieveMessageById(messageId).queue(message -> {
+                    message.editMessageEmbeds(plugin.getEmbedUtils().createServerStatusEmbed())
+                        .queue(success -> {}, error -> {
+                            plugin.getLogger().warning("Failed to edit status message: " + error.getMessage());
+                        });
+                }, throwable -> {
+                    // Message not found, create a new one
+                    channel.sendMessageEmbeds(plugin.getEmbedUtils().createServerStatusEmbed())
+                        .queue(this::setMessageId, error -> {
+                            plugin.getLogger().warning("Failed to create new status message: " + error.getMessage());
+                        });
+                });
+            }
+        } catch (Exception e) {
+            plugin.getLogger().severe("Error updating status message: " + e.getMessage());
         }
     }
 

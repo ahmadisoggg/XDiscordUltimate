@@ -198,7 +198,7 @@ public class ConfigManager {
         if (section != null) {
             return section.getKeys(deep);
         }
-        return null;
+        return new java.util.HashSet<>();
     }
     
     /**

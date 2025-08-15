@@ -219,8 +219,13 @@ public class NetworkManager {
 
     public String decrypt(String data) {
         if (!config.encryption) return data;
-        byte[] plain = aes.decrypt(Base64.getDecoder().decode(data));
-        return new String(plain, java.nio.charset.StandardCharsets.UTF_8);
+        try {
+            byte[] plain = aes.decrypt(Base64.getDecoder().decode(data));
+            return new String(plain, java.nio.charset.StandardCharsets.UTF_8);
+        } catch (Exception e) {
+            logger.warning("Failed to decrypt data: " + e.getMessage());
+            return null;
+        }
     }
 
     // Simple builder helpers

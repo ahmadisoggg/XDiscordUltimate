@@ -323,15 +323,25 @@ public class XDiscordCommand implements CommandExecutor, TabCompleter {
         if (sub.equals("list")) {
             // Request player lists from peers and display with local
             String thisId = plugin.getConfig().getString("network.server_id", plugin.getServer().getName());
+            if (thisId == null || thisId.isEmpty()) {
+                thisId = plugin.getServer().getName();
+            }
+            
             java.util.Map<String, java.util.List<String>> map = new java.util.LinkedHashMap<>();
-            java.util.List<String> local = plugin.getServer().getOnlinePlayers().stream().map(org.bukkit.entity.Player::getName).collect(java.util.stream.Collectors.toList());
+            java.util.List<String> local = plugin.getServer().getOnlinePlayers().stream()
+                .map(org.bukkit.entity.Player::getName)
+                .collect(java.util.stream.Collectors.toList());
             map.put(thisId, local);
 
             if (plugin.getNetworkManager() != null) {
-                // Send request
-                plugin.getNetworkManager().send(
-                    com.xreatlabs.xdiscordultimate.network.NetworkManager.PacketBuilder.playerListRequest(thisId)
-                );
+                try {
+                    // Send request
+                    plugin.getNetworkManager().send(
+                        com.xreatlabs.xdiscordultimate.network.NetworkManager.PacketBuilder.playerListRequest(thisId)
+                    );
+                } catch (Exception e) {
+                    plugin.getLogger().warning("Failed to send player list request: " + e.getMessage());
+                }
             }
 
             sender.sendMessage("Players by server (local view):");

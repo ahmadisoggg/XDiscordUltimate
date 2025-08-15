@@ -345,13 +345,16 @@ public class XDiscordUltimate extends JavaPlugin {
                 getLogger().info("No network section in config.yml; skipping network sync");
                 return;
             }
+            
             // Auto-generate key if missing
-            if (section.getString("key", "").isEmpty()) {
+            String key = section.getString("key", "");
+            if (key == null || key.isEmpty()) {
                 String newKey = java.util.UUID.randomUUID().toString();
                 getConfig().set("network.key", newKey);
                 saveConfig();
                 getLogger().info("[XDiscordUltimate] Network key generated automatically for proxy instance.");
             }
+            
             com.xreatlabs.xdiscordultimate.network.NetworkConfig cfg = new com.xreatlabs.xdiscordultimate.network.NetworkConfig(getConfig().getConfigurationSection("network"));
             networkManager = new com.xreatlabs.xdiscordultimate.network.NetworkManager(this);
             networkManager.initialize(cfg);

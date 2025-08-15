@@ -153,6 +153,11 @@ public class DiscordManager {
     }
 
     public void setMainGuild(JDA jda) {
+        if (jda == null) {
+            plugin.getLogger().warning("JDA is null, cannot set main guild.");
+            return;
+        }
+        
         String guildId = plugin.getConfigManager().getGuildId();
         if (guildId != null && !guildId.isEmpty()) {
             this.mainGuild = jda.getGuildById(guildId);
@@ -203,6 +208,16 @@ public class DiscordManager {
     }
 
     public void sendTestDropdowns(org.bukkit.entity.Player player) {
+        if (player == null) {
+            plugin.getLogger().warning("Player is null in sendTestDropdowns");
+            return;
+        }
+        
+        if (jda == null) {
+            player.sendMessage("Discord bot is not connected. Please try again later.");
+            return;
+        }
+        
         String discordId = plugin.getDatabaseManager().getDiscordId(player.getUniqueId()).join();
         if (discordId == null) {
             player.sendMessage("You need to verify your account first. Use /verify");
@@ -210,6 +225,11 @@ public class DiscordManager {
         }
 
         jda.openPrivateChannelById(discordId).queue(channel -> {
+            if (channel == null) {
+                player.sendMessage("Failed to open private channel. Please check your Discord settings.");
+                return;
+            }
+            
             net.dv8tion.jda.api.EmbedBuilder embed = plugin.getEmbedUtils().createThemedEmbed("info", "Test Dropdowns");
             embed.setDescription("Please select an option from the dropdowns below.");
 
@@ -217,7 +237,13 @@ public class DiscordManager {
                     .addActionRow(plugin.getDropdownManager().createChannelSelectMenu())
                     .addActionRow(plugin.getDropdownManager().createRoleSelectMenu())
                     .addActionRow(plugin.getDropdownManager().createServerActionSelectMenu())
-                    .queue();
+                    .queue(success -> {}, error -> {
+                        plugin.getLogger().warning("Failed to send test dropdowns to " + player.getName() + ": " + error.getMessage());
+                        player.sendMessage("Failed to send dropdowns. Please try again later.");
+                    });
+        }, error -> {
+            plugin.getLogger().warning("Failed to open private channel for " + player.getName() + ": " + error.getMessage());
+            player.sendMessage("Failed to open private channel. Please check your Discord settings.");
         });
     }
 }

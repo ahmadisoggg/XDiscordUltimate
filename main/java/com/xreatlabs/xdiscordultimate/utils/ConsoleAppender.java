@@ -31,11 +31,26 @@ public class ConsoleAppender extends AbstractAppender {
         if (!isStarted()) {
             return;
         }
-        if (plugin.getDiscordManager() != null && plugin.getDiscordManager().isReady()) {
-            TextChannel consoleChannel = plugin.getDiscordManager().getConsoleChannel();
-            if (consoleChannel != null) {
-                consoleChannel.sendMessage("```" + event.getMessage().getFormattedMessage() + "```").queue();
+        
+        try {
+            if (plugin.getDiscordManager() != null && plugin.getDiscordManager().isReady()) {
+                TextChannel consoleChannel = plugin.getDiscordManager().getConsoleChannel();
+                if (consoleChannel != null) {
+                    String message = event.getMessage().getFormattedMessage();
+                    if (message != null && !message.isEmpty()) {
+                        // Limit message length to avoid Discord limits
+                        if (message.length() > 1900) {
+                            message = message.substring(0, 1900) + "...";
+                        }
+                        consoleChannel.sendMessage("```" + message + "```")
+                            .queue(success -> {}, error -> {
+                                // Silently ignore Discord errors to avoid spam
+                            });
+                    }
+                }
             }
+        } catch (Exception e) {
+            // Silently ignore errors to prevent console spam
         }
     }
 }

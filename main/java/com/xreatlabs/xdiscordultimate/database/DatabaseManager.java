@@ -698,8 +698,12 @@ public class DatabaseManager {
      */
     public void close() {
         if (dataSource != null && !dataSource.isClosed()) {
-            dataSource.close();
-            plugin.getLogger().info("Database connection closed.");
+            try {
+                dataSource.close();
+                plugin.getLogger().info("Database connection closed.");
+            } catch (Exception e) {
+                plugin.getLogger().severe("Failed to close database connection: " + e.getMessage());
+            }
         }
     }
     
