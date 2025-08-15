@@ -124,12 +124,26 @@ features:
     event-channel: "minecraft-events"
     # Use embeds for events
     use-embeds: true
+    # Show playtime information in leave messages
+    show-playtime: true
+    # Show player location in join/leave messages
+    show-location: true
+    # Show player ping in join messages
+    show-ping: true
+    # Colors for different event types
+    colors:
+      join: "#00FF00"
+      leave: "#FF0000"
+      first-join: "#FF69B4"
+      death: "#FFA500"
+      advancement: "#FFD700"
     # Custom emojis for events
     emojis:
-      join: ":arrow_right:"
-      leave: ":arrow_left:"
-      death: ":skull:"
-      advancement: ":trophy:"
+      join: "➕"
+      leave: "➖"
+      death: "💀"
+      advancement: "🏆"
+      first-join: "🎉"
   
   admin-alerts:
     enabled: true

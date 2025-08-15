@@ -26,6 +26,9 @@ public class PlayerEventsModule extends Module implements Listener {
     private boolean showAdvancements;
     private boolean showFirstJoin;
     private boolean useEmbeds;
+    private boolean showPlaytime;
+    private boolean showLocation;
+    private boolean showPing;
     
     // Colors for different event types
     private Color joinColor;
@@ -73,12 +76,15 @@ public class PlayerEventsModule extends Module implements Listener {
     }
     
     private void loadConfiguration() {
-        eventsChannelName = getConfig().getString("channel-name", "player-events");
-        showJoinLeave = getConfig().getBoolean("show-join-leave", true);
-        showDeaths = getConfig().getBoolean("show-deaths", true);
-        showAdvancements = getConfig().getBoolean("show-advancements", true);
-        showFirstJoin = getConfig().getBoolean("show-first-join", true);
+        eventsChannelName = getConfig().getString("event-channel", "player-events");
+        showJoinLeave = getConfig().getBoolean("events.join", true) && getConfig().getBoolean("events.leave", true);
+        showDeaths = getConfig().getBoolean("events.death", true);
+        showAdvancements = getConfig().getBoolean("events.advancement", true);
+        showFirstJoin = getConfig().getBoolean("events.first-join", true);
         useEmbeds = getConfig().getBoolean("use-embeds", true);
+        showPlaytime = getConfig().getBoolean("show-playtime", true);
+        showLocation = getConfig().getBoolean("show-location", true);
+        showPing = getConfig().getBoolean("show-ping", true);
         
         // Load colors
         joinColor = parseColor(getConfig().getString("colors.join", "#00FF00"));
@@ -95,6 +101,9 @@ public class PlayerEventsModule extends Module implements Listener {
         Player player = event.getPlayer();
         boolean isFirstJoin = !player.hasPlayedBefore();
         
+        // Record join time for playtime tracking
+        plugin.getPlaytimeTracker().recordJoin(player);
+        
         if (isFirstJoin && showFirstJoin) {
             firstJoinTimes.put(player.getUniqueId(), System.currentTimeMillis());
             sendFirstJoinMessage(player);
@@ -108,7 +117,11 @@ public class PlayerEventsModule extends Module implements Listener {
         if (!showJoinLeave) return;
         
         Player player = event.getPlayer();
-        sendLeaveMessage(player);
+        
+        // Record leave and get session playtime
+        long sessionTime = plugin.getPlaytimeTracker().recordLeave(player);
+        
+        sendLeaveMessage(player, sessionTime);
     }
     
     @EventHandler(priority = EventPriority.MONITOR)
@@ -145,42 +158,70 @@ public class PlayerEventsModule extends Module implements Listener {
         if (channel == null) return;
         
         if (useEmbeds) {
+            String avatarUrl = "https://crafatar.com/avatars/" + player.getUniqueId() + "?overlay";
+            
             EmbedBuilder embed = new EmbedBuilder()
                 .setColor(joinColor)
-                .setAuthor(player.getName() + " joined the server", 
+                .setAuthor("➕ " + player.getName() + " joined the server", 
                     null, 
-                    "https://crafatar.com/avatars/" + player.getUniqueId() + "?overlay")
+                    avatarUrl)
                 .setDescription("**" + player.getName() + "** has joined the server!")
-                .addField("Players Online", Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers(), true)
-                .setTimestamp(Instant.now())
-                .setFooter("Player Join", plugin.getServer().getServerIcon() != null ? 
-                    "attachment://server-icon.png" : null);
+                .addField("Players Online", Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers(), true);
             
-            channel.sendMessageEmbeds(embed.build()).queue();
+            if (showLocation) {
+                embed.addField("Location", formatLocation(player), true);
+            }
+            if (showPing) {
+                embed.addField("Ping", player.getPing() + "ms", true);
+            }
+            
+            embed.setTimestamp(Instant.now())
+                .setFooter("Player Join • " + plugin.getServer().getName(), null);
+            
+            channel.sendMessageEmbeds(embed.build()).queue(
+                success -> plugin.getLogger().info("Sent join embed for " + player.getName()),
+                error -> plugin.getLogger().warning("Failed to send join embed: " + error.getMessage())
+            );
         } else {
             channel.sendMessage("**➕ " + player.getName() + " joined the server**").queue();
         }
     }
     
-    private void sendLeaveMessage(Player player) {
+    private void sendLeaveMessage(Player player, long sessionTime) {
         TextChannel channel = getEventsChannel();
         if (channel == null) return;
         
         if (useEmbeds) {
+            String avatarUrl = "https://crafatar.com/avatars/" + player.getUniqueId() + "?overlay";
+            String sessionPlaytime = plugin.getPlaytimeTracker().formatSessionTime(sessionTime);
+            String totalPlaytime = plugin.getPlaytimeTracker().formatPlaytime(plugin.getPlaytimeTracker().getTotalPlaytime(player));
+            
             EmbedBuilder embed = new EmbedBuilder()
                 .setColor(leaveColor)
-                .setAuthor(player.getName() + " left the server", 
+                .setAuthor("➖ " + player.getName() + " left the server", 
                     null, 
-                    "https://crafatar.com/avatars/" + player.getUniqueId() + "?overlay")
+                    avatarUrl)
                 .setDescription("**" + player.getName() + "** has left the server!")
-                .addField("Players Online", (Bukkit.getOnlinePlayers().size() - 1) + "/" + Bukkit.getMaxPlayers(), true)
-                .setTimestamp(Instant.now())
-                .setFooter("Player Leave", plugin.getServer().getServerIcon() != null ? 
-                    "attachment://server-icon.png" : null);
+                .addField("Players Online", (Bukkit.getOnlinePlayers().size() - 1) + "/" + Bukkit.getMaxPlayers(), true);
             
-            channel.sendMessageEmbeds(embed.build()).queue();
+            if (showPlaytime) {
+                embed.addField("Session Time", sessionPlaytime, true);
+                embed.addField("Total Playtime", totalPlaytime, true);
+            }
+            if (showLocation) {
+                embed.addField("Last Location", formatLocation(player), false);
+            }
+            
+            embed.setTimestamp(Instant.now())
+                .setFooter("Player Leave • " + plugin.getServer().getName(), null);
+            
+            channel.sendMessageEmbeds(embed.build()).queue(
+                success -> plugin.getLogger().info("Sent leave embed for " + player.getName() + " (Session: " + sessionPlaytime + ")"),
+                error -> plugin.getLogger().warning("Failed to send leave embed: " + error.getMessage())
+            );
         } else {
-            channel.sendMessage("**➖ " + player.getName() + " left the server**").queue();
+            String sessionPlaytime = plugin.getPlaytimeTracker().formatSessionTime(sessionTime);
+            channel.sendMessage("**➖ " + player.getName() + " left the server** (Played for " + sessionPlaytime + ")").queue();
         }
     }
     
@@ -189,19 +230,31 @@ public class PlayerEventsModule extends Module implements Listener {
         if (channel == null) return;
         
         if (useEmbeds) {
+            String avatarUrl = "https://crafatar.com/avatars/" + player.getUniqueId() + "?overlay";
+            
             EmbedBuilder embed = new EmbedBuilder()
                 .setColor(firstJoinColor)
-                .setAuthor("Welcome " + player.getName() + "!", 
+                .setAuthor("🎉 Welcome " + player.getName() + "!", 
                     null, 
-                    "https://crafatar.com/avatars/" + player.getUniqueId() + "?overlay")
+                    avatarUrl)
                 .setDescription("🎉 **" + player.getName() + "** has joined for the first time! 🎉")
                 .addField("Total Players", String.valueOf(Bukkit.getOfflinePlayers().length), true)
-                .addField("Players Online", Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers(), true)
-                .setTimestamp(Instant.now())
-                .setFooter("First Join", plugin.getServer().getServerIcon() != null ? 
-                    "attachment://server-icon.png" : null);
+                .addField("Players Online", Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers(), true);
             
-            channel.sendMessageEmbeds(embed.build()).queue();
+            if (showLocation) {
+                embed.addField("Location", formatLocation(player), true);
+            }
+            if (showPing) {
+                embed.addField("Ping", player.getPing() + "ms", true);
+            }
+            
+            embed.setTimestamp(Instant.now())
+                .setFooter("First Join • " + plugin.getServer().getName(), null);
+            
+            channel.sendMessageEmbeds(embed.build()).queue(
+                success -> plugin.getLogger().info("Sent first join embed for " + player.getName()),
+                error -> plugin.getLogger().warning("Failed to send first join embed: " + error.getMessage())
+            );
         } else {
             channel.sendMessage("**🎉 Welcome " + player.getName() + " to the server for the first time! 🎉**").queue();
         }

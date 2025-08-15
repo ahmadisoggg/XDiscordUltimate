@@ -70,6 +70,16 @@ server-control:
   tps-info: "&bCurrent TPS: &e%tps%"
   player-list: "&bOnline players (&e%count%&b): &f%players%"
 
+# Playtime messages
+playtime:
+  own-playtime: "&6=== Your Playtime ==="
+  other-playtime: "&6=== %player%'s Playtime ==="
+  session: "&eSession: &f%time%"
+  total: "&eTotal: &f%time%"
+  no-permission: "&cYou don't have permission to check other players' playtime!"
+  player-offline: "&cPlayer %player% is not online!"
+  usage: "&cUsage: /playtime [player]"
+
 # Discord console messages
 discord-console:
   executed: "&aCommand executed from Discord console."

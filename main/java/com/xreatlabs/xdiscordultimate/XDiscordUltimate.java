@@ -31,6 +31,7 @@ public class XDiscordUltimate extends JavaPlugin {
     private TPSManager tpsManager;
     private StatusMessageManager statusMessageManager;
     private com.xreatlabs.xdiscordultimate.network.NetworkManager networkManager;
+    private PlaytimeTracker playtimeTracker;
 
     private Object luckPerms;
     private boolean luckPermsEnabled;
@@ -65,6 +66,7 @@ public class XDiscordUltimate extends JavaPlugin {
         tpsManager = new TPSManager(this);
         getServer().getScheduler().runTaskTimer(this, tpsManager, 0L, 1L);
         statusMessageManager = new StatusMessageManager(this);
+        playtimeTracker = new PlaytimeTracker(this);
         
         // Check optional dependencies
         checkOptionalDependencies();
@@ -207,6 +209,7 @@ public class XDiscordUltimate extends JavaPlugin {
         getCommand("help").setExecutor(new HelpCommand(this));
         getCommand("msg").setExecutor(new MessageCommand(this));
         getCommand("statusgraph").setExecutor(new StatusGraphCommand(this));
+        getCommand("playtime").setExecutor(new PlaytimeCommand(this));
     }
     
     private void registerListeners() {
@@ -336,6 +339,10 @@ public class XDiscordUltimate extends JavaPlugin {
 
     public com.xreatlabs.xdiscordultimate.network.NetworkManager getNetworkManager() {
         return networkManager;
+    }
+
+    public PlaytimeTracker getPlaytimeTracker() {
+        return playtimeTracker;
     }
 
     private void initializeNetwork() {

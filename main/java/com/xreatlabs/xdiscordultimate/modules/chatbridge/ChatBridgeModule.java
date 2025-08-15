@@ -401,22 +401,61 @@ public class ChatBridgeModule extends Module implements Listener {
      * Send a player join message to Discord
      */
     public void sendJoinMessage(Player player) {
-        String message = plugin.getConfig().getString("messages.join-message", 
-            ":arrow_right: **%player%** joined the server!");
-        message = message.replace("%player%", player.getName());
+        TextChannel channel = getChatChannel(chatChannelName);
+        if (channel == null) return;
         
-        sendSystemMessage(message, new Color(0, 255, 0));
+        String avatarUrl = "https://crafatar.com/avatars/" + player.getUniqueId() + "?overlay";
+        
+        EmbedBuilder embed = new EmbedBuilder()
+            .setColor(new Color(0, 255, 0))
+            .setAuthor("➕ " + player.getName() + " joined the server", 
+                null, 
+                avatarUrl)
+            .setDescription("**" + player.getName() + "** has joined the server!")
+            .addField("Players Online", plugin.getServer().getOnlinePlayers().size() + "/" + plugin.getServer().getMaxPlayers(), true)
+            .addField("Location", formatLocation(player), true)
+            .addField("Ping", player.getPing() + "ms", true)
+            .setTimestamp(Instant.now())
+            .setFooter("Player Join • " + plugin.getServer().getName(), null);
+        
+        channel.sendMessageEmbeds(embed.build()).queue(
+            success -> info("Sent join embed for " + player.getName()),
+            error -> warning("Failed to send join embed: " + error.getMessage())
+        );
     }
     
     /**
      * Send a player leave message to Discord
      */
     public void sendLeaveMessage(Player player) {
-        String message = plugin.getConfig().getString("messages.leave-message", 
-            ":arrow_left: **%player%** left the server!");
-        message = message.replace("%player%", player.getName());
+        TextChannel channel = getChatChannel(chatChannelName);
+        if (channel == null) return;
         
-        sendSystemMessage(message, new Color(255, 0, 0));
+        // Get playtime information
+        long sessionTime = plugin.getPlaytimeTracker().getCurrentSessionTime(player);
+        long totalTime = plugin.getPlaytimeTracker().getTotalPlaytime(player);
+        String sessionPlaytime = plugin.getPlaytimeTracker().formatSessionTime(sessionTime);
+        String totalPlaytime = plugin.getPlaytimeTracker().formatPlaytime(totalTime);
+        
+        String avatarUrl = "https://crafatar.com/avatars/" + player.getUniqueId() + "?overlay";
+        
+        EmbedBuilder embed = new EmbedBuilder()
+            .setColor(new Color(255, 0, 0))
+            .setAuthor("➖ " + player.getName() + " left the server", 
+                null, 
+                avatarUrl)
+            .setDescription("**" + player.getName() + "** has left the server!")
+            .addField("Players Online", (plugin.getServer().getOnlinePlayers().size() - 1) + "/" + plugin.getServer().getMaxPlayers(), true)
+            .addField("Session Time", sessionPlaytime, true)
+            .addField("Total Playtime", totalPlaytime, true)
+            .addField("Last Location", formatLocation(player), false)
+            .setTimestamp(Instant.now())
+            .setFooter("Player Leave • " + plugin.getServer().getName(), null);
+        
+        channel.sendMessageEmbeds(embed.build()).queue(
+            success -> info("Sent leave embed for " + player.getName() + " (Session: " + sessionPlaytime + ")"),
+            error -> warning("Failed to send leave embed: " + error.getMessage())
+        );
     }
     
     /**
@@ -429,5 +468,17 @@ public class ChatBridgeModule extends Module implements Listener {
                         .replace("%death_message%", deathMessage);
         
         sendSystemMessage(message, new Color(255, 165, 0));
+    }
+    
+    /**
+     * Format player location for Discord embeds
+     */
+    private String formatLocation(Player player) {
+        return String.format("%s at %d, %d, %d",
+            player.getWorld().getName(),
+            player.getLocation().getBlockX(),
+            player.getLocation().getBlockY(),
+            player.getLocation().getBlockZ()
+        );
     }
 }

@@ -53,6 +53,12 @@ commands:
     usage: /<command>
     permission: xdiscord.statusgraph
   
+  playtime:
+    description: Check your or another player's playtime
+    usage: /<command> [player]
+    permission: xdiscord.playtime
+    aliases: [pt, playtime]
+  
   xdiscord:
     description: Main XDiscordUltimate command
     usage: /<command> [reload|status|help|key|network|run]
@@ -114,3 +120,11 @@ permissions:
   xdiscord.bypass.verification:
     description: Bypass Discord verification requirement
     default: false
+  
+  xdiscord.playtime:
+    description: Check your own playtime
+    default: true
+  
+  xdiscord.playtime.others:
+    description: Check other players' playtime
+    default: op
