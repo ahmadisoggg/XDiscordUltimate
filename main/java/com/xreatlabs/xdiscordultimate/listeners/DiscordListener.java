@@ -23,14 +23,16 @@ import org.bukkit.entity.Player;
 
 import java.awt.*;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
-
-import java.awt.*;
-import java.time.Instant;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.LogEvent;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.core.appender.AbstractAppender;
+import org.apache.logging.log4j.core.layout.PatternLayout;
 
 public class DiscordListener extends ListenerAdapter {
     
@@ -254,34 +256,99 @@ public class DiscordListener extends ListenerAdapter {
         
         String command = event.getOption("command").getAsString();
         
+        // Create a list to capture command output
+        List<String> commandOutput = new ArrayList<>();
+        
+        // Create a custom appender to capture console output
+        final AbstractAppender appender = new AbstractAppender("DiscordConsole-" + event.getUser().getId() + "-" + System.currentTimeMillis(), null,
+                PatternLayout.createDefaultLayout(), false, null) {
+            @Override
+            public void append(LogEvent event) {
+                final String message = event.getMessage().getFormattedMessage();
+                // Capture all console output during command execution
+                commandOutput.add(message);
+            }
+        };
+        appender.start();
+        
+        final Logger rootLogger = (Logger) LogManager.getRootLogger();
+        rootLogger.addAppender(appender);
+        
         // Execute command on main thread
         CompletableFuture.runAsync(() -> {
             Bukkit.getScheduler().runTask(plugin, () -> {
                 try {
                     boolean success = Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
-                
-                EmbedBuilder embed = new EmbedBuilder()
-                    .setTitle(success ? "✅ Command Executed" : "❌ Command Failed")
-                    .addField("Command", "`" + command + "`", false)
-                    .addField("Status", success ? "Success" : "Failed", true)
-                    .addField("Executor", event.getUser().getAsMention(), true)
-                    .setColor(success ? Color.GREEN : Color.RED)
-                    .setTimestamp(Instant.now());
-                
-                event.getHook().editOriginalEmbeds(embed.build()).queue();
-                
-                // Log to console
-                plugin.getLogger().info("Discord console command executed by " + event.getUser().getAsTag() + ": " + command);
-                
-            } catch (Exception e) {
-                EmbedBuilder errorEmbed = new EmbedBuilder()
-                    .setTitle("❌ Command Error")
-                    .setDescription("An error occurred while executing the command")
-                    .addField("Command", "`" + command + "`", false)
-                    .addField("Error", e.getMessage(), false)
-                    .setColor(Color.RED)
-                    .setTimestamp(Instant.now());
-                
+                    
+                    // Wait a bit for output to be captured
+                    Thread.sleep(500);
+                    
+                    // Remove the appender
+                    rootLogger.removeAppender(appender);
+                    appender.stop();
+                    
+                    // Build the response embed
+                    EmbedBuilder embed = new EmbedBuilder()
+                        .setTitle(success ? "✅ Command Executed" : "❌ Command Failed")
+                        .addField("Command", "`" + command + "`", false)
+                        .addField("Executor", event.getUser().getAsMention(), true)
+                        .setColor(success ? Color.GREEN : Color.RED)
+                        .setTimestamp(Instant.now());
+                    
+                    // Add command output if available
+                    if (!commandOutput.isEmpty()) {
+                        StringBuilder output = new StringBuilder();
+                        int lineCount = 0;
+                        
+                        for (String line : commandOutput) {
+                            // Skip empty lines and some system messages
+                            if (line.trim().isEmpty() || line.contains("Starting minecraft server")) {
+                                continue;
+                            }
+                            
+                            // Limit to reasonable number of lines
+                            if (lineCount >= 20) {
+                                output.append("\n... (output truncated - too many lines)");
+                                break;
+                            }
+                            
+                            if (output.length() + line.length() > 1000) {
+                                output.append("\n... (output truncated - too long)");
+                                break;
+                            }
+                            
+                            output.append(line).append("\n");
+                            lineCount++;
+                        }
+                        
+                        String finalOutput = output.toString().trim();
+                        if (!finalOutput.isEmpty()) {
+                            embed.addField("Output", "```" + finalOutput + "```", false);
+                        } else {
+                            embed.addField("Output", "Command executed successfully (no output)", false);
+                        }
+                    } else {
+                        embed.addField("Output", "Command executed successfully (no output)", false);
+                    }
+                    
+                    event.getHook().editOriginalEmbeds(embed.build()).queue();
+                    
+                    // Log to console
+                    plugin.getLogger().info("Discord console command executed by " + event.getUser().getAsTag() + ": " + command);
+                    
+                } catch (Exception e) {
+                    // Remove the appender on error
+                    rootLogger.removeAppender(appender);
+                    appender.stop();
+                    
+                    EmbedBuilder errorEmbed = new EmbedBuilder()
+                        .setTitle("❌ Command Error")
+                        .setDescription("An error occurred while executing the command")
+                        .addField("Command", "`" + command + "`", false)
+                        .addField("Error", e.getMessage(), false)
+                        .setColor(Color.RED)
+                        .setTimestamp(Instant.now());
+                    
                     event.getHook().editOriginalEmbeds(errorEmbed.build()).queue();
                 }
             });
