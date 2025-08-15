@@ -4,3 +4,28 @@ build
 gradlew
 gradlew.bat
 .env
+
+# Build artifacts
+*.jar
+build/
+target/
+out/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
